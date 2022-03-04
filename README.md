@@ -95,6 +95,49 @@ $ docker images
 
 ![](/Images/Image6.PNG)
 
+To know where your docker is saving the files, here is the command
+
+$ docker info | grep -i root
+
+Output >> Docker Root Dir: /var/lib/docker
+
+And to know, how much space is my docker taking, then here it is
+
+$ sudo du -sh /var/lib/Docker
+
+Let go ahead and create a directory 
+
+$ mkdir jenkins-data
+
+This jenkins directory should ideally be under /home/nitin
+
+![](/Images/Image7.PNG)
+
+Lets create a sample docker compose yaml file under jenkins-data
+
+$ cd jenkins-data
+
+Lets create a jenkins_home directory to map it to our volume otherwise data within the container will be destroyed if in case I dont save that data into a volume
+
+$ mkdir jenkins_home
+
+Assuming that you are under your path /home/nitin/jenkins-data, you should see jenkins_home. Lets create a sample docker compose yaml file.
+
+$ vi docker-compose.yml
+
+Docker compose file like in the script is a definition where I have defined which services we want to spin.
+
+In our docker compose file, I have defined a service called as jenkins. The container name is jenkins and the image is jenkins/jenkins which is exposed to port 8080. It is going to save all the information under /jenkins/home that was created earlier. It is then going to bind the service to the network called net. 
+
+![](/Images/Image8.PNG)
+
+
+
+
+
+
+
+
 
 
 
