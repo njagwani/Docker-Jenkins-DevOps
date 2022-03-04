@@ -12,14 +12,16 @@ Firstly, let start off by Installing Docker on Cent OS 7
 
 #### Installing Docker on Cent OS 7
 
-Screenshot showcading that I am able to access my CentOS 7 VM
+Screenshot showcasing that I am able to access my CentOS 7 VM
 
 ![](/Images/Image1.png)
 
 Kindly refer to below link for installing Docker on CentOS (https://docs.docker.com/engine/install/centos/) or follow along:
 
 Set up the repository
+
 Install the yum-utils package (which provides the yum-config-manager utility) and set up the stable repository.
+
 $ sudo yum install -y yum-utils
 
 $ sudo yum-config-manager \
@@ -27,14 +29,18 @@ $ sudo yum-config-manager \
     https://download.docker.com/linux/centos/docker-ce.repo
 
 Install Docker Engine
+
 Install the latest version of Docker Engine and containerd, or go to the next step to install a specific version:
+
 $ sudo yum install docker-ce docker-ce-cli containerd.
 
 Start Docker
- $ sudo systemctl start docker
+
+$ sudo systemctl start docker
 
 Verify that Docker Engine is installed correctly by running the hello-world image.
- $ sudo docker run hello-world
+
+$ sudo docker run hello-world
 
 ![](/Images/Image2.png)
 
@@ -49,7 +55,8 @@ $ docker ps
 Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json": dial unix /var/run/docker.sock: connect: permission denied
 
 Please add the user to the group docker by entering the command below, please note that nitin is my user. 
-sudo usermod -aG docker nitin 
+
+$ sudo usermod -aG docker nitin 
 
 Logout out of your current session and then log back in. 
 
