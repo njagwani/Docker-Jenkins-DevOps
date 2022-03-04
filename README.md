@@ -198,7 +198,7 @@ You should not be able to use your local DNS (jenkins.local:8080) to bring up th
 ![](/Images/Image23.PNG)
 
 
-Please note that you can use "docker-compose stop" to stop the Jenkins container and docker-compose up" to start the Jenkins Container. Also you can use docker-compose restart jenkins to restart the jenkins container service.
+Please note that you can use "docker-compose stop" to stop the Jenkins container and docker-compose start" to start the Jenkins Container. Also you can use "docker-compose restart jenkins" to restart the jenkins container service.
 
 In case if you want to completely delete your entire service then enter the command "docker-compose down"
 
