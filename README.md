@@ -187,6 +187,18 @@ Once the suggested plugins have been installed, then go ahead and create First A
 
 ![](/Images/Image21.PNG)
 
+We are going to start using a local DNS for Jenkins Server. 
+
+Navigate to path on your local Machine C:\Windows\System32\drivers\etc and open hosts file with Administartor rights. Copy the IP address from your web broswers and pasted it into you hosts file with dns record.
+
+![](/Images/Image21.PNG)
+
+You should not be able to use your local DNS to bring up the Jenkins page. 
+
+![](/Images/Image22.PNG)
+
+
+
 
 
 
