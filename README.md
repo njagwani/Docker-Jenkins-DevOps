@@ -165,6 +165,29 @@ Copy the IP Address of your machine which can be obtained by using the command "
 
 ![](/Images/Image14.PNG)
 
+Password can be found by running the command docker logs -f "container name"
+
+$ docker logs -f jenkins 
+
+![](/Images/Image15.PNG)
+
+Copy the password and paste the it on your web browser and hit on "Continue". Then Select the option "Install suggested plugins"
+
+![](/Images/Image16.PNG)
+
+![](/Images/Image17.PNG)
+
+Once the suggested plugins have been installed, then go ahead and create First Admin User. Once you have created the admin user, you should then able to login to your Jenkins Dashboard successfully.
+
+![](/Images/Image18.PNG)
+
+![](/Images/Image19.PNG)
+
+![](/Images/Image20.PNG)
+
+![](/Images/Image21.PNG)
+
+
 
 
 
