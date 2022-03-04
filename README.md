@@ -131,6 +131,45 @@ In our docker compose file, I have defined a service called as jenkins. The cont
 
 ![](/Images/Image8.PNG)
 
+Whats next??
+
+I am going to spin up Jenkins by starting our Container service using Docker
+
+But before that we need to make user that user nitin, id = 1000 can write to jenkins_home folder
+
+![](/Images/Image9.PNG)
+
+$ sudo chown 1000:1000 jenkins_home -R
+
+![](/Images/Image10.PNG)
+
+Now, that we gave the persmissions, we need to spin up the server using the Docker Compose command as below:
+
+$ docker-compose up -d
+
+![](/Images/Image11.PNG)
+
+You can now see you jenkins server running here by running the docker ps command.
+
+$ docker ps
+
+![](/Images/Image12.PNG)
+
+In order to check the logs of your Jenkins container, then you can the run command docker logs -f "container name". Jenkins is my container as seen below. 
+
+$ docker log -f jenkins
+
+![](/Images/Image13.PNG)
+
+Copy the IP Address of your machine which can be obtained by using the command "ip a", paste the IP in the web browser exposed over port 8080. You should then be able to see a jenkins page similar to below.
+
+![](/Images/Image14.PNG)
+
+
+
+
+
+
 
 
 
