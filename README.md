@@ -14,7 +14,7 @@ Firstly, let start off by Installing Docker on Cent OS 7
 
 Screenshot showcading that I am able to access my CentOS 7 VM
 
-![](/Images/Image1.PNG)
+![](/Images/Image1.png)
 
 Kindly refer to below link for installing Docker on CentOS (https://docs.docker.com/engine/install/centos/) or follow along:
 
@@ -36,7 +36,7 @@ Start Docker
 Verify that Docker Engine is installed correctly by running the hello-world image.
  $ sudo docker run hello-world
 
-![](/Images/Image2.PNG)
+![](/Images/Image2.png)
 
 Enable Docker service at boot
 
@@ -55,7 +55,7 @@ Logout out of your current session and then log back in.
 
 You should now be able to run the docker ps command without any issues
 
-![](/Images/Image3.PNG)
+![](/Images/Image3.png)
 #### Installing Docker Compose 
 Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services.
 
@@ -69,7 +69,7 @@ Test the installation
 
 $ docker-compose --version
 
-![](/Images/Image4.PNG)
+![](/Images/Image4.png)
 #### Installing Jenkins using Docker
 
 Download the Jenkins Docker Image 
