@@ -193,7 +193,7 @@ Navigate to path on your local Machine C:\Windows\System32\drivers\etc and open 
 
 ![](/Images/Image22.PNG)
 
-You should not be able to use your local DNS to bring up the Jenkins page. 
+You should not be able to use your local DNS (jenkins.local:8080) to bring up the Jenkins page. 
 
 ![](/Images/Image23.PNG)
 
