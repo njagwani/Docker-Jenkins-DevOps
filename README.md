@@ -89,7 +89,7 @@ $ docker pull jenkins/jenkins
 
 ![](/Images/Image5.PNG)
 
-Once the image has been downloaded, run the below command to check find how where is the image located.
+Once the image has been downloaded, run the below command to check find where is the image located.
 
 $ docker images
 
