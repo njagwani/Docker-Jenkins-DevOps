@@ -316,7 +316,23 @@ And My Build was successful!!!
 
 ![](/Images/Image47.PNG)
 
+Now lets go to configure and create a third parameter but this time select "Choice parameter", give the name to be LAST_NAME and Default Value to be any 3 names
 
+![](/Images/Image48.PNG)
+
+Edit your LAST_NAME to your execute shell and click on Save.
+
+![](/Images/Image49.PNG)
+
+
+Select the option "Build with Paramter", you should then be able to see that you will get to pick from from any of the 3 names for LAST_NAME. Click on Build
+
+![](/Images/Image50.PNG)
+
+
+In the below image, you can see that my build ran successfully without any errors.
+
+![](/Images/Image51.PNG)
 
 
 
