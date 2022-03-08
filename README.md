@@ -334,6 +334,45 @@ In the below image, you can see that my build ran successfully without any error
 
 ![](/Images/Image51.PNG)
 
+Now the last stage is on how to add basic logic and boolean parameters. For this stage I decided to modify my script as below. 
+
+![](/Images/Image52.PNG)
+
+Now, go ahead and copy your script to your container by running the command "docker cp script.sh jenkins:/tmp/script.sh"
+
+![](/Images/Image53.PNG)
+
+Now lets go to Jenkins project, edit the parameters by removing the SECOND_NAME and add another paramter by Selecting "Boolean". Enter "SHOW" under name and check the box for "Set by default"
+
+![](/Images/Image54.PNG)
+
+Under execute shell, paste the path of script file in container followed by $FIRST_NAME $LAST_NAME $SHOW and then click on Save.
+
+![](/Images/Image55.PNG)
+
+Now, Select the option "Build with Parameters", uncheck the "SHOW" option which consider this as a false entry and run the Build. 
+
+![](/Images/Image56.PNG)
+
+You will get a message "if you want to see the name, please checkbox the show option"
+
+![](/Images/Image57.PNG)
+
+Now lets build a job again, but this time lets checkbox the "show" option
+
+![](/Images/Image58.PNG)
+
+In the console output, you can see that checking the show option box, accepts it as true and we got the result "Hello, Nitin Sandy".
+
+![](/Images/Image59.PNG)
+
+
+
+
+
+
+
+
 
 
 
