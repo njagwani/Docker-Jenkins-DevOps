@@ -202,6 +202,84 @@ Please note that you can use "docker-compose stop" to stop the Jenkins container
 
 In case if you want to completely delete your entire service then enter the command "docker-compose down"
 
+Lets navigate to Jenkins and create a job.
+
+Lets click on create new item. 
+
+![](/Images/Image24.PNG)
+
+We are not configuring a job or a task but the concept in Jenkins is a job.
+
+Navigate to Build Environment Tab and select "Execute Shell" under Build
+
+![](/Images/Image25.PNG)
+
+One very important thing we need to know here is that everything that is going to happen under the Jenkins Job will occur within the container. 
+
+When we say within the container, it means that we need to go inside the container by running the below command.This is just for understanding
+
+$ docker exec -ti jenkins bash (jenkins is the name of my container)
+
+![](/Images/Image26.PNG)
+
+Lets go back to your browser and under Execute shell enter "echo Hello World" and click on Save. 
+
+![](/Images/Image27.PNG)
+
+Click on Build Now
+
+![](/Images/Image28.PNG)
+
+In the console output, you can see that the build was successful priniting "Hello World".
+
+![](/Images/Image29.PNG)
+
+Now, lets try to go insider the container by entering the command "docker exec -ti jenkins bash" and lets run a command that would echo the date and time.
+
+$ echo The current date is $(date)
+
+![](/Images/Image31.PNG)
+
+You should immediately get the current date and time. 
+
+Similarly, a job can be executed under Build shell by copying this command "echo The current date is $(date)" under Build Environment Execute Shell and pasting it here. 
+
+![](/Images/Image32.PNG)
+
+Lets go ahead and modify our Execute Shell on Jenkins Broswer to be as below where we end up resurrecting to a file under a container
+
+![](/Images/Image33.PNG)
+
+Select Build to build this task, you will see that task was built successfully. 
+
+![](/Images/Image34.PNG) 
+
+Verify the output under the path /tmp/info in your container. You should be able to see the output for the job that was executed under your last build. 
+
+![](/Images/Image35.PNG) 
+
+Execute a script from Jenkins
+
+In order to get started, let us first exit out of the container. Lets create a script by the name script.sh that will output "Hello, Your Firstname and Lastname"
+
+![](/Images/Image36.PNG)
+
+Make sure you give executable permissions to run the script and lets go ahead and run the script "script.sh"
+
+$ ./script.sh Nitin Jagwani
+
+![](/Images/Image37.PNG)
+
+Now in order to copy to script from my VM to my docker container, it is done in the following way
+
+$ docker cp script.sh jenkins:/tmp/script.sh
+
+Now go inside your container and cat /tmp/script.sh to ensure that script.sh file is present in your conatiner. You should be able to see the contents of script.sh file. 
+
+![](/Images/Image38.PNG)
+
+
+
 
 
 
