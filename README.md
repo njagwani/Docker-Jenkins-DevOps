@@ -278,7 +278,43 @@ Now go inside your container and cat /tmp/script.sh to ensure that script.sh fil
 
 ![](/Images/Image38.PNG)
 
+We can build a job by pasting the above script under Build Environment Execute Shell in Jenkins.
 
+![](/Images/Image39.PNG)
+
+![](/Images/Image40.PNG)
+
+Adding Paramenters to Job in Jenkins to dynamically be able to set the name that we want to read
+
+Go to your main project and select "Configure"
+
+![](/Images/Image41.PNG)
+
+Under "General" tab, select the option "the project is parameterized" and in the "Add Paramter" dropdown select the option "String Parameter"
+
+![](/Images/Image42.PNG)
+
+I have entered FIRST_NAME for Name and gave the default value has Nitin. I created a 2nd string parameter, entered "SECOND_NAME" for name and Jagwani for default value. 
+
+![](/Images/Image43.PNG)
+
+I edited my shell and added the parameters.
+
+echo "Hello, $FIRST_NAME $SECOND_NAME"
+
+![](/Images/Image44.PNG)
+
+Save your build and now you should see that build option has now changed to "Build with Parameters"
+
+![](/Images/Image45.PNG)
+
+I decided to change to FIRST_NAME to Jones and SECOND_NAME to Jackson and ran the build
+
+![](/Images/Image46.PNG)
+
+And My Build was successful!!!
+
+![](/Images/Image47.PNG)
 
 
 
