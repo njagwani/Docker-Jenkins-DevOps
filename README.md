@@ -375,15 +375,18 @@ In the console output, you can see that checking the show option box, accepts it
 
 ![](/Images/Image59.PNG)
 
-Docker + Jenkins + SSH -l
-How to execute jobs in remote machines
+## Stage 3
+
+- Excuting Jenkins jobs in remote machines
+- Installing Jenkins Plugin (SSH Plugin)
+- Integrating Docker SSH server with Jenkins
+- Running Jenkins Job on Docker container through SSH
 
 Here we will be creating a new container which is going to have an SSH service so that we can connect from Jenkins container to this new container without the need for creating new VM.
 
 Lets start off by creating a new directory as send below and then navigate to your newly created directory.
 
  ![](/Images/Image60.PNG)
-
 
 On my Docker file, I am going to be adding the following:
 - Pick CentOS as the base for operating system
@@ -392,7 +395,6 @@ On my Docker file, I am going to be adding the following:
 - Assign a password for this user as standard input
 - Create a home directory for this user, here we are creating .ssh folder to store some configurations so that we can connect to this container from Jenkins container. 
 - Giving permissions to the newly created user to be able to write to .ssh folder
-
 
 Now lets create a private ssh key to make connections in a secure way. 
 
@@ -467,7 +469,7 @@ The reason why we created a remote-key is to get authenticated without giving an
  ![](/Images/Image70.PNG)
 
 
-How to install Plugins in Jenkins
+Installing Plugins in Jenkins
 
 Navigate to Jenkins Dashboard and Select "Manage Jenkins" and then click on "Manage Plugins"
 
@@ -499,7 +501,7 @@ Navigate to Jenkins Dashboard, Click on "Manage Jenkins" and then select "Config
 
   ![](/Images/Image73.PNG)
 
-How to run a Jenkins job on Docker container via SSH
+Running a Jenkins job on Docker container via SSH
 
 Navigate to your Jenkins Dashboard, Click on "New Item". Enter thne item name to be "remote-test", select the "Build Triggers" tab. Click on SSH site which should automatically be pre-populated. In the command shell, enter the following to build your job. Click on save. 
 
