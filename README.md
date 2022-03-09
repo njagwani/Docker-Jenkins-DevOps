@@ -202,6 +202,15 @@ Please note that you can use "docker-compose stop" to stop the Jenkins container
 
 In case if you want to completely delete your entire service then enter the command "docker-compose down"
 
+## STAGE 2
+
+- Creating Jenkins Job
+- Redirecting Jenkins Job Output
+- Executing a bash script from Jenkins
+- Adding Parameters to your Jenkins Job
+- Creating Jenkins List Parameter with help of script
+- Adding basic logic and boolean parameters to Jenkins Job. 
+
 Lets navigate to Jenkins and create a job.
 
 Lets click on create new item. 
