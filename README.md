@@ -375,7 +375,7 @@ In the console output, you can see that checking the show option box, accepts it
 
 ![](/Images/Image59.PNG)
 
-## Stage 3
+## STAGE 3
 
 - Excuting Jenkins jobs in remote machines
 - Installing Jenkins Plugin (SSH Plugin)
