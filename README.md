@@ -209,7 +209,7 @@ In case if you want to completely delete your entire service then enter the comm
 - Executing a bash script from Jenkins
 - Adding Parameters to your Jenkins Job
 - Creating Jenkins List Parameter with help of script
-- Adding basic logic and boolean parameters to Jenkins Job. 
+- Adding basic logic and boolean parameters to Jenkins Job
 
 Lets navigate to Jenkins and create a job.
 
@@ -374,6 +374,167 @@ Now lets build a job again, but this time lets checkbox the "show" option
 In the console output, you can see that checking the show option box, accepts it as true and we got the result "Hello, Nitin Sandy".
 
 ![](/Images/Image59.PNG)
+
+Docker + Jenkins + SSH -l
+How to execute jobs in remote machines
+
+Here we will be creating a new container which is going to have an SSH service so that we can connect from Jenkins container to this new container without the need for creating new VM.
+
+Lets start off by creating a new directory as send below and then navigate to your newly created directory.
+
+ ![](/Images/Image60.PNG)
+
+
+On my Docker file, I am going to be adding the following:
+- Pick CentOS as the base for operating system
+- Install openssh server 
+- Create a user for this distribution
+- Assign a password for this user as standard input
+- Create a home directory for this user, here we are creating .ssh folder to store some configurations so that we can connect to this container from Jenkins container. 
+- Giving permissions to the newly created user to be able to write to .ssh folder
+
+
+Now lets create a private ssh key to make connections in a secure way. 
+
+$ ssh-keygen -f remote-key
+
+ ![](/Images/Image61.PNG)
+
+ Now this passphrase has created 2 files
+  - remote-key (private certficate key)
+  - remote-key.pub (public key)
+
+ ![](/Images/Image62.PNG)
+
+
+In order to make ssh connection to this container, we are going to open up our Docker file and copy this remote-key.pub to .ssh folder that we previously created.
+
+The user that we created is the owner of everything that is under this directory /home/remote_user/.ssh/.
+
+The remote user that we created and group remote user that us created by default is going to be the owner recursively of this folder.
+
+So, whatever is going to be under .ssh folder is going to be owned by the user. Now we are going to give more permissions for these files that we created here. 
+
+In order to run this server from scratch, ssh needs to create some global keys which can be done using the command "RUN /usr/sbin/ssh-keygen. This is needed for a docker container.
+
+The last thing we need to do for our service to run is to solidify the CMD. We are instructing Docker on how the service should be started. 
+
+ ![](/Images/Image63.PNG)
+
+Now, lets go your docker-compose.yml file which is under jenkins-data, and lets modify our docker-compose file.
+
+Its time to create another service called remote-host. Here we will set the container name, image, build and network. 
+
+ ![](/Images/Image64.PNG)
+
+Now in order to build our image, we need to execute the below command:
+
+$ docker-compose build
+
+ ![](/Images/Image65.PNG)
+
+ After running the command docker images, you can see my remote-host image whcih has the necessary ssh service installed. 
+
+ ![](/Images/Image66.PNG)
+
+ Now lets go ahead and create a container using our newly created remote-host image by running the below commands
+
+ $ docker-compose up -d
+
+ ![](/Images/Image67.PNG)
+
+ $ docker ps
+
+ ![](/Images/Image68.PNG)
+
+Lets go inside your jenkins container by entering the command " docker exec -ti jenkins bash" and here we can ssh to our newly create container named "remote-host"
+
+$ docker exec -ti jenkins bash
+
+$ ssh remote_user@remote_host
+
+ ![](/Images/Image69.PNG)
+
+
+Now lets copy the remote-key which can be found under centos7 directory to your jenkins container path /tmp/remote-key. You can use this key to connect to the remote_user@remote_host
+
+$ docker cp remote-key jenkins:/tmp/remote-key
+
+$ ssh -i remote-key remote_user@remote_host
+
+The reason why we created a remote-key is to get authenticated without giving any password.
+
+ ![](/Images/Image70.PNG)
+
+
+How to install Plugins in Jenkins
+
+Navigate to Jenkins Dashboard and Select "Manage Jenkins" and then click on "Manage Plugins"
+
+ ![](/Images/Image75.PNG)
+
+ Our goal is to install SSH plugin that I have already installed. 
+
+  ![](/Images/Image76.PNG)
+
+Now, that the SSH plugin is installed it is time to integrate Docker SSH server with Jenkins
+
+Go to Jenkins Dashboard, Select "Manage Jenkins" and click "Manage Credentials"
+
+  ![](/Images/Image71.PNG)
+
+Go to your Jenkins user and then on the left side you will see an option "Add Credentials". Click on it. 
+
+-  Select the Kind type : SSH Username with private key
+-  Enter the username : remote_user
+-  Select the option :Private Key" and paste your private key (Go to your path centos7 and enter the command "cat remote-key" to view the passphrase of your key, copy and paste it    here in the box provided.). Click on Ok.
+
+  ![](/Images/Image72.PNG)
+
+  ![](/Images/Image74.PNG)
+
+Navigate to Jenkins Dashboard, Click on "Manage Jenkins" and then select "Configure System". Navigate to SS remote hosts, enter the Hostname of your remote container (remote_host), SSH port number is 22 and select "remote_user" from the credentials drop down. Click on "Check Connection" and you should be able to see that "connection was successfull".
+
+  ![](/Images/Image77.PNG)
+
+  ![](/Images/Image73.PNG)
+
+How to run a Jenkins job on Docker container via SSH
+
+Navigate to your Jenkins Dashboard, Click on "New Item". Enter thne item name to be "remote-test", select the "Build Triggers" tab. Click on SSH site which should automatically be pre-populated. In the command shell, enter the following to build your job. Click on save. 
+
+  ![](/Images/Image78.PNG)
+
+Go ahead and Select "Build Now". In the console output, you can see that my build was successful. 
+
+  ![](/Images/Image79.PNG)
+
+Lets check this my going inside your remote-host container. You should be able to see the result from the Jenkins build. 
+
+  ![](/Images/Image80.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
