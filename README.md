@@ -516,6 +516,47 @@ Lets check this my going inside your remote-host container. You should be able t
   ![](/Images/Image80.PNG)
 
 
+Jenkins & AWS
+
+Create a Jenkins Job that will take MySQL backup and upload that SQL backup to Amazon S3 Bucket. 
+
+Create MySQL server on Docker container
+
+You will need to go to your docker-compose.yml file located in jenkins-data directory and add the new service for your MySQL Server.
+
+  ![](/Images/Image81.PNG)
+
+In order to create your MySQL container, run the command "docker-compose up -d"
+
+  ![](/Images/Image82.PNG)
+
+  ![](/Images/Image83.PNG)
+
+You can see that your service is up and running well by entering the command "docker ps"
+
+  ![](/Images/Image84.PNG)
+
+Now enter the command "docker logs -f db" to check if your MySQL service is ready for connections. I was able to see the message under my logs confirming that MySQL service is ready for connections. 
+
+  ![](/Images/Image85.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
