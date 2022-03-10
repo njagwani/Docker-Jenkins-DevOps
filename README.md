@@ -540,6 +540,30 @@ Now enter the command "docker logs -f db" to check if your MySQL service is read
 
   ![](/Images/Image85.PNG)
 
+Lets login to the new created container using the command "docker exec -ti db bash" and lets connect to our database in our container by entering the command "mysql -u root -p", enter the password and login should be successful. 
+
+  ![](/Images/Image86.PNG)
+
+Enter the command "show databases;" to veiw the information associated with your database. 
+
+  ![](/Images/Image87.PNG)
+
+Lets install MySQL Client and AWS CLI. We are going to be taking a backup from MySQL DB and upload it to AWS S3 Bucket. 
+
+Navigate to your Dockerfile by first going to your centos7 directory and add the contents to install MySQL client and AWS CLI
+
+  ![](/Images/Image88.PNG)
+
+Lets go to your directory jenkins-data, and run the command docker-compose build which will install MySQL and AWS CLI.
+
+  ![](/Images/Image89.PNG)
+
+
+Image was build without any issues. 
+
+  ![](/Images/Image90.PNG)
+
+
 
 
 
