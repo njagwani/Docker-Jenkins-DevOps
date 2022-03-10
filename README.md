@@ -143,7 +143,7 @@ $ sudo chown 1000:1000 jenkins_home -R
 
 ![](/Images/Image10.PNG)
 
-Now, that we gave the persmissions, we need to spin up the server using the Docker Compose command as below:
+Now, that I gave the persmissions, Lets spin up the server using the Docker Compose command as below:
 
 $ docker-compose up -d
 
@@ -187,7 +187,7 @@ Once the suggested plugins have been installed, then go ahead and create First A
 
 ![](/Images/Image21.PNG)
 
-We are going to start using a local DNS for Jenkins Server. 
+I am going to start using a local DNS for Jenkins Server. 
 
 Navigate to path on your local Machine C:\Windows\System32\drivers\etc and open hosts file with Administartor rights. Copy the IP address from your web broswers and pasted it into you hosts file with dns record.
 
@@ -217,7 +217,7 @@ Lets click on create new item.
 
 ![](/Images/Image24.PNG)
 
-We are not configuring a job or a task but the concept in Jenkins is a job.
+I am not configuring a job or a task but the concept in Jenkins is a job.
 
 Navigate to Build Environment Tab and select "Execute Shell" under Build
 
@@ -225,7 +225,7 @@ Navigate to Build Environment Tab and select "Execute Shell" under Build
 
 One very important thing we need to know here is that everything that is going to happen under the Jenkins Job will occur within the container. 
 
-When we say within the container, it means that we need to go inside the container by running the below command.This is just for understanding
+When we say within the container, it means that we need to go inside the container by running the below command. This is just for understanding
 
 $ docker exec -ti jenkins bash (jenkins is the name of my container)
 
@@ -255,7 +255,7 @@ Similarly, a job can be executed under Build shell by copying this command "echo
 
 ![](/Images/Image32.PNG)
 
-Lets go ahead and modify our Execute Shell on Jenkins Broswer to be as below where we end up resurrecting to a file under a container
+Lets go ahead and modify our Execute Shell on Jenkins Broswer to be as below where I end up redirecting to a file under a container
 
 ![](/Images/Image33.PNG)
 
@@ -371,7 +371,7 @@ Now lets build a job again, but this time lets checkbox the "show" option
 
 ![](/Images/Image58.PNG)
 
-In the console output, you can see that checking the show option box, accepts it as true and we got the result "Hello, Nitin Sandy".
+In the console output, you can see that checking the show option box, accepts it as true and got the result "Hello, Nitin Sandy".
 
 ![](/Images/Image59.PNG)
 
@@ -382,7 +382,7 @@ In the console output, you can see that checking the show option box, accepts it
 - Integrating Docker SSH server with Jenkins
 - Running Jenkins Job on Docker container through SSH
 
-Here we will be creating a new container which is going to have an SSH service so that we can connect from Jenkins container to this new container without the need for creating new VM.
+Here I will be creating a new container which is going to have an SSH service so that I can connect from Jenkins container to this new container without the need for creating new VM.
 
 Lets start off by creating a new directory as send below and then navigate to your newly created directory.
 
@@ -393,7 +393,7 @@ On my Docker file, I am going to be adding the following:
 - Install openssh server 
 - Create a user for this distribution
 - Assign a password for this user as standard input
-- Create a home directory for this user, here we are creating .ssh folder to store some configurations so that we can connect to this container from Jenkins container. 
+- Create a home directory for this user, here I am creating .ssh folder to store some configurations so that I can connect to this container from Jenkins container. 
 - Giving permissions to the newly created user to be able to write to .ssh folder
 
 Now lets create a private ssh key to make connections in a secure way. 
@@ -558,10 +558,48 @@ Lets go to your directory jenkins-data, and run the command docker-compose build
 
   ![](/Images/Image89.PNG)
 
-
 Image was build without any issues. 
 
   ![](/Images/Image90.PNG)
+
+Now that MySQL has been installed on remote-host container, lets test it. Oops!!! I see an error messahe MySQL not found.
+
+  ![](/Images/Image91.PNG)
+
+Oh the reason why we got this message because I forgot to run "docker-compose up -d". Lets run this command. You can see that it has now re-created the remote-host container.
+
+  ![](/Images/Image92.PNG)
+
+Create MySQL database
+Lets login to the remote-host container. Now that I am inside the container, I am going to login to MySQL container by entering the command "mysql -u root -h db_host -p". You will then be prompted to enter the pasword. Login in to should be successful.  
+
+  ![](/Images/Image93.PNG)
+
+Now that we are connected to our SQL server, lets create a new database. I am going to create a new database called testdb by entering the below command.
+
+> create database testdb;
+
+  ![](/Images/Image94.PNG)
+
+  ![](/Images/Image95.PNG)
+
+  ![](/Images/Image96.PNG)
+
+  After creating a table testdb, I was then able to add information to my table using the below commands.
+
+  ![](/Images/Image97.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
