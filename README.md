@@ -589,6 +589,100 @@ Now that we are connected to our SQL server, lets create a new database. I am go
 
   ![](/Images/Image97.PNG)
 
+  ![](/Images/Image98.PNG)
+
+
+Lets create an AWS S3 bucket.
+
+Navigate to AWS management console and search for S3, Select "Create Bucket". Give a bucket name, select the region and click on "Create"
+
+  ![](/Images/Image99.PNG)
+
+In the screenshot below, my AWS S3 bucket was successfully created in AWS Region eu-west-1
+
+  ![](/Images/Image100.PNG)
+
+Now, in order to upload our SQL backups to AWS S3 buckets, we need to provide authentication. In order to achieve this, let navigate to IAM service. Select 'Users' on the left select and click "Add users". 
+
+  ![](/Images/Image101.PNG)
+
+Enter the name of the user and select the option "Access key - Programmatic access", click on Next.
+
+  ![](/Images/Image102.PNG)
+
+Select the option "Attach existing policies", in the filter policy enter s3, Select the option AmazonS3FullAccess. Then click on Next and Create User
+
+  ![](/Images/Image103.PNG)
+
+You will then get to a page where you will be asked to Download .csv that containers your AccesskeyID and Secret access key. Go ahead and Download the csv file. 
+
+  ![](/Images/Image104.PNG)
+
+Lets take an SQL backup and upload to S3 bucket manually. We will first go inside our remote-host container and take the SQL backup by running the command "mysqldump -u root -h db_host -p testdb > /tmp/db.sql". Here were are redirecting it to /tmp/db.sql
+
+  ![](/Images/Image105.PNG)
+
+You can see that SQL backup was created successfully. 
+
+  ![](/Images/Image106.PNG)
+
+In order to meet the authentication requirement to connect to our S3 bucket, we need to export some environment variables. Paste the values from variables from the CSV file that you downloaded earlier.
+
+  ![](/Images/Image107.PNG)
+
+Run the below command to copy your MySQL backup to S3 bucket. You should then receive an upload message confirming your upload to S3 bucket. 
+
+$ aws s3 cp /tmp/db.sql s3://mysqljenkins-backup/db.sql
+
+  ![](/Images/Image108.PNG)
+
+In the screengrab below, you can see that db.sql backup was successfully uploaded to S3 bucket. 
+
+  ![](/Images/Image109.PNG)
+
+
+Lets Automate the backup and upload process with a shell script
+
+Go to your remote-host container, create a scipt in the tmp directory.
+
+  ![](/Images/Image110.PNG)
+
+Give executable permissions to your /tmp/script.sh by entering the command "chmod +x /tmp/script.sh". Lets run the script in the container by entering the command
+
+$ /tmp/script.sh db_host 1234 test_db
+
+  ![](/Images/Image111.PNG)
+
+In the screenshot above, you can see that you I was able to getting different times for MySQL backup. 
+
+Lets integrate the script with AWS CLI, by going to your script placed under /tmp/script.sh and lets define our AWS environment variables and add the command to copy the backup to s3 bucket.
+
+  ![](/Images/Image112.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 
