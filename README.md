@@ -687,10 +687,50 @@ Lets go ahead and do the same thing for storing AWS Credentials. Click on Add Cr
 
   ![](/Images/Image120.png)
 
-  
+
+Lets create a Jenkins Job to upload SQLDB backup to AWS.
+
+On your Jenkins Dashboard, select "New Item", enter the name to be "aws-backup", select the project to be "Free Style". Now, click on Configure. 
+
+  ![](/Images/Image120.PNG)
+
+Under General, select the option 'This project is parameterized', Select the String Parameter as seen below and add the parameters.
+
+  ![](/Images/Image121.PNG)
+
+Add the secrets which were previously configured under Build Environment as seen below. Under Build, select the option "Execute shell script on remote host using ssh" and enter the command as seen below. Click on Save
+
+  ![](/Images/Image122.PNG)
+
+Let go ahead and select the option "Build with Parameters", enter the correct hostname, database name, AWS bucket name and then Select Build. 
+
+  ![](/Images/Image123.PNG)
+
+In the console output, we can see that build was successful and I was successfully able to upload SQL DB backup to AWS bucket with just one click. 
+
+  ![](/Images/Image124.PNG)
+
+Persist the script on remote host
+
+Let go inside the remote-host container and copy the contents of the script,sh file located in /tmp/ directory
+
+  ![](/Images/Image125.PNG)
+
+Exit out of your container, be sure to be under jenkins-data directory and lets create a new file aws-s3.sh by entering the command "vi aws-s3.sh" and paste the contents here.
+
+  ![](/Images/Image126.PNG)
+
+One final change required is to add volume to the remote-host container so that whenever the container is deleted, the volume will be persisted. 
+
+Go to your docker-compose.yml file and add the volume under remote-host container as seen below. Be sure with give the file aws-s3 executable permissions. 
+
+  ![](/Images/Image127.PNG)
 
 
-Its time to create a Jenkins job to upload DB to AWS. 
+
+
+
+
 
 
 
