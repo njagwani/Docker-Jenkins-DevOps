@@ -659,8 +659,36 @@ Lets integrate the script with AWS CLI, by going to your script placed under /tm
 
   ![](/Images/Image112.PNG)
 
+Since our DB password is exposed, its time to know to manage this information correctly by placing these passwords in the form of a secret. 
+
+Lets navigate to Jenkins Dashboard, Click on Credentials and select Jenkins. 
+
+  ![](/Images/Image113.PNG)
+
+Select "Global Credentials"
+
+  ![](/Images/Image114.PNG)
+
+On the left side, select "Add Credentials". Select the kind to be "Secret text", Enter the SQL password in the Secret box. Under ID, please enter the name of the associated the password for example "MYSQL_PWD". Select 'Ok'
+
+  ![](/Images/Image115.PNG)
+
+In the screenshot, below you can see that global credential for MySQL_PWD was created successfully. Select the MYSQL_PWD and click on update.
+
+  ![](/Images/Image116.PNG)
+
+  ![](/Images/Image117.PNG)
+
+Lets go ahead and do the same thing for storing AWS Credentials. Click on Add Credentials. Select the kind to be "Secret text", Enter the 'AWS_SECRET_KEY' password from the CSV file (previously downloaded), ID can be named as AWS_SECRET_KEY", click on Ok.
+
+  ![](/Images/Image118.PNG)
+
+  ![](/Images/Image119.PNG)
+
+  ![](/Images/Image120.PNG)
 
 
+Its time to create a Jenkins job to upload DB to AWS. 
 
 
 
