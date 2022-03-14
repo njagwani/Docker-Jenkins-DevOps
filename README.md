@@ -520,8 +520,8 @@ Lets check this my going inside your remote-host container. You should be able t
 - Creating MySQL server on Docker Container
 - Creating a test database and creating tables on MySQL server installed on Docker Container 
 - Creating an AWS S3 bucket and IAM access.
-- Taking an SQK backup and uploading to S3 bucket manually 
-- Automating the SQL Backup and Upload Process to AWS S3 Bucket with Shell Script 
+- Taking MySQL DB backup and uploading to S3 bucket manually 
+- Automating the SQL DB Backup and Upload Process to AWS S3 Bucket with Shell Script 
 - Managing AWS CLI and SQL DB credentials on Jenkins
 - Creating a Jenkins Job to upload SQL DB backup to AWS S3 bucket with just one click. 
 
