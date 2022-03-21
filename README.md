@@ -732,6 +732,171 @@ Go to your docker-compose.yml file and add the volume under remote-host containe
   ![](/Images/Image127.PNG)
 
 
+## STAGE 5
+
+- Installing Ansible and running it on a Docker Container
+- Making SSH keys permanent on Jenkins container
+- Creating Ansible Inventory and Ansible Playbooks
+- Executing Ansible Playbook from Jenkins
+- Adding Parameter to Anisible & Jenkins
+
+Install Ansible and run it on a docker container.
+
+Navigate to your jenkins-data directory and lets create a new directory by the name "jenkins-ansible". 
+
+$ mkdir jenkins-ansible
+
+Lets go inside the jenkins-ansible directory and lets create a new Docker file to create new service. 
+
+$ cd jenkins-ansible
+
+$ vi Dockerfile
+
+In this Dockerfile, we are instructing Docker to install Ansible on Jenkins
+
+![](/Images/Image128.PNG)
+
+Lets go to jenkins-data directory and add changes to your docker-compose.yml file as seen below. We will be referencing our jenkins container to build the image jenkins-ansible and referencing context to be jenkins-ansible directory.
+
+![](/Images/Image129.PNG)
+
+We need to run the command 'docker-compose build' to build all the features and configuration instructed on Dockerfile under jenkins-ansible directory
+
+![](/Images/Image130.PNG)
+
+Lets run the docker ps command, here we can see that our docker container is still using the old jenkins image instead of using our newly created jenkins-ansible image. 
+
+![](/Images/Image131.PNG)
+
+We need to re-create the jenkins container to use the new image that we created which can be done by running the command 'docker-compose up -d'. Just be sure to run this command when you are present in jenkins-data directory because here is where your docker-compose.yml file is located.
+
+![](/Images/Image132.PNG)
+
+Make ssh keys permanent on Jenkins container
+
+Copied the remote-key from centos7 directory to jenkins-ansible directory
+
+![](/Images/Image133.PNG)
+
+Lets create a ansible directory under jenkins_home directory
+
+![](/Images/Image134.PNG)
+
+In order to add the remote key under jenkins-ansible container, then we need to copy the remote-key under jenkins_home/ansible
+
+![](/Images/Image135.PNG)
+
+Lets go inside the Jenkins container and verify if we are able to see the remote-key under ansible directory.
+
+![](/Images/Image136.PNG)
+
+Creating an Ansible inventory and how to test connection by pinging to hosts from ansible.
+
+Under jenkins-ansible, directory you should have 2 files in total (Dockerfile and remote-key). Let us create an hosts file, by entering the command 'vi hosts'. 
+
+![](/Images/Image137.PNG)
+
+Lets copy the hosts file to jenkins_home/ansible directory
+
+![](/Images/Image138.PNG)
+
+Now, lets test the connection from jenkins container to connect to hosts using ansible.
+
+$ ansible -i hosts -m ping test1
+
+![](/Images/Image139.PNG)
+
+Create Ansible Playbook
+
+Lets create a file play.yml under jenkins-ansible directory.
+
+$ vi play.yml
+
+![](/Images/Image140.PNG)
+
+This playbook is going to run a Hello World and then it is going to re-direct the output by creating a new file in /tmp/ansible-file inside the jenkins container.
+
+Lets copy the play.yml file to jenkins_home/ansible/ folder so that we can access these files from the container. 
+
+![](/Images/Image141.PNG)
+
+How do we run this play.yml to connect to the test1 host and create the Hello World file. 
+
+Lets navigate to jenkins container and enter the command 'ansible-playbook -i hosts play.yml'
+
+![](/Images/Image142.PNG)
+
+One thing to note here is that test1 host is pointing to remote-host container, hence the Hello world should be present under /tmp/ansible-file inside the remote-host conatiner
+
+![](/Images/Image143.PNG)
+
+Integrate Jenkins and Ansible
+
+Install Jenkins
+
+Lets go to the Jenkins Dashboard. The first step here is first install the Ansible plugin. 
+
+This can be done by cicking on "Manage Jenkins" and then select "Manage Plugins". Click on Avialable Tab, in the find option type "ansible", Select the check box for "Ansible" and click on the option Install without restart.
+
+![](/Images/Image144.PNG)
+
+![](/Images/Image145.PNG)
+
+![](/Images/Image146.PNG)
+
+Execute a playbook from Jenkins
+
+Lets go to Jenkins Dashboard, Select "New Item", give it a name, select the project type to be "Freestyle", click on OK. Select the Build Enviorment Tab, scroll down to the Build setion, add the build step here to be "Invoke Ansible playbook". Under playbook path enter the path where play.yml file is placed inside the container (/var/jenkins_home/ansible/play.yml and /var/jenkins_home/ansible/hosts). Click on "Build Now" and select "Console Output", my output was successful.
+
+![](/Images/Image147.PNG)
+
+![](/Images/Image148.PNG)
+
+![](/Images/Image149.PNG)
+
+![](/Images/Image150.PNG)
+
+![](/Images/Image151.PNG)
+
+![](/Images/Image152.PNG)
+ 
+Adding Pararmeters to Ansible and Jenkins
+
+Before we get started on the making changes on Jenkins side, lets first make changes to our play.yml file. 
+
+$ vi /jenkins_home/ansible/play.yml
+
+In the screenshot below, the file has now been edited.
+
+![](/Images/Image153.PNG)
+
+Now, lets go to the ansible-jenkins project and click on 'Configure'. Under General Tab, Select the option 'this project is paramterized', give it a name "ANSIBLE_MSG" and Default Value to be "Hello World". At the bottom right, click on the advanced section, under Extra Variables add the Key to be "MSG" and value to be "$ANSIBLE_MSG". Click on Save. 
+
+Select the option "Build with Parameters", In the text box you can replace Hello World with anything. In my case, I entered "Hi, this is Nitin Jagwani". Click on Build. Under console output, you can see that my build executed successfully without any issues.
+
+![](/Images/Image154.PNG)
+
+![](/Images/Image155.PNG)
+
+![](/Images/Image156.PNG)
+
+![](/Images/Image157.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
